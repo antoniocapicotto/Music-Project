@@ -1,318 +1,307 @@
 
-
 //Libreria
-#include "MusicProject.h"
+#include "./../include/MusicProject.h"
 
+void VisualizzaBranoArtista(database Database) {
 
-void VisualizzaBranoArtista( database Database ) {
+	int i = 0;
 
-    int i = 0;
+	printf("\n\n\n\n\n\t  COLLEGAMENTI BRANOARTISTA  \n\n");
 
-    printf( "\n\n\n\n\n\t  COLLEGAMENTI BRANOARTISTA  \n\n" );
+	i = 0;
+	while (Database.BranoArtista[i].idBrano != SENTINELLA) {
 
-    i = 0;
-    while( Database.BranoArtista[i].idBrano != SENTINELLA ) {
+		printf("\n\n\t\t [BRANO] %s <--->  %s [ARTISTA] \n",
+				Database.Brano[Database.BranoArtista[i].idBrano].titolo,
+				Database.Artista[Database.BranoArtista[i].idArtista].nome);
 
-        printf("\n\n\t\t [BRANO] %s <--->  %s [ARTISTA] \n" , Database.Brano[ Database.BranoArtista[ i ].idBrano ].titolo , Database.Artista[ Database.BranoArtista[ i ].idArtista ].nome );
+		i++;
+	}
 
-        i++;
-    }
-
-
-    return ;
-
-}
-
-void VisualizzaBranoAlbum( database Database ) {
-
-    int i = 0;
-
-    printf("\n\n\n\n\n\t ********************* COLLEGAMENTI BRANOALBUM ************************* \n\n");
-
-    i = 0;
-    while( Database.BranoAlbum[ i ].idBrano != SENTINELLA ) {
-
-        printf("\n\n\t\t [BRANO] %s <--->  %s [ALBUM] \n" , Database.Brano[ Database.BranoAlbum[ i ].idBrano ].titolo , Database.Album[ Database.BranoAlbum[ i ].idAlbum ].titolo );
-
-        i++;
-
-    }
-
-    printf( "\n\n\t\t **************************************************************************** \n\n" );
-
-
-    return ;
+	return;
 
 }
 
-void VisualizzaBranoGenere( database Database ) {
+void VisualizzaBranoAlbum(database Database) {
 
-    int i = 0;
+	int i = 0;
 
-    printf( "\n\n\n\n\n\t ****************************** COLLEGAMENTI BRANOGENERE ****************************** \n\n" );
+	printf(
+			"\n\n\n\n\n\t ********************* COLLEGAMENTI BRANOALBUM ************************* \n\n");
 
-    i = 0;
-    while ( Database.BranoGenere[ i ].idBrano != SENTINELLA ) {
+	i = 0;
+	while (Database.BranoAlbum[i].idBrano != SENTINELLA) {
 
-        printf("\n\n\t\t [BRANO] %s <--->  %s [GENERE] \n" , Database.Brano[ Database.BranoGenere[ i ].idBrano].titolo , Database.Genere[ Database.BranoGenere[ i ].idGenere ].nome );
+		printf("\n\n\t\t [BRANO] %s <--->  %s [ALBUM] \n",
+				Database.Brano[Database.BranoAlbum[i].idBrano].titolo,
+				Database.Album[Database.BranoAlbum[i].idAlbum].titolo);
 
-        i++;
-    }
+		i++;
 
-    printf( "\n\n\t\t **************************************************************************** \n\n" );
+	}
 
-    return ;
+	printf(
+			"\n\n\t\t **************************************************************************** \n\n");
 
-}
-
-void VisualizzaPlaylistBrano( database Database ) {
-
-    int i = 0;
-
-    printf("\n\n\n\n\n\t COLLEGAMENTI PLAYLISTBRANO \n\n");
-
-    i = 0;
-    while( Database.PlaylistBrano[ i ].idBrano != SENTINELLA ) {
-
-        printf("\n\n\t\t [BRANO] %s <--->  %s [PLAYLIST] \n" , Database.Brano[ Database.PlaylistBrano[ i ].idBrano ].titolo , Database.Playlist[ Database.PlaylistBrano[ i ].idPlaylist ].nome  );
-
-        i++;
-    }
-
-
-    return ;
-}
-
-
-void StampareInfoCollegamentiBrano( database Database , int IdBrano ) {
-
-    StamapareInfoBranoAlbum( Database , IdBrano );
-    StampareInfoBranoGenere( Database , IdBrano );
-    StampareInfoBranoArtista( Database , IdBrano );
-    StampareInfoBranoPlaylist( Database , IdBrano );
-
-
-    return ;
-}
-
-void StamapareInfoBranoAlbum( database Database , int IdBrano ) {
-
-    int i = 0;
-
-    if ( VerificaCollegamentoBranoAlbum( IdBrano , Database ) == VERO ) {
-
-
-        /* ricerca della posizione del collegamento brano - album presente */
-
-        i = 0;
-        while ( ( Database.BranoAlbum[ i ].idBrano != SENTINELLA )  &&  ( Database.BranoAlbum[ i ].idBrano != IdBrano )  ) {
-
-            i++;
-        }
-
-        StampareInfoAlbum( Database , Database.BranoAlbum[ i ].idAlbum );
-
-        Database.UltimoEsito = 0;
-
-    } else {
-
-        Database.UltimoEsito = 1;
-    }
-
-
-    return ;
+	return;
 
 }
 
-void StampareInfoBranoGenere( database Database ,int IdBrano ) {
+void VisualizzaBranoGenere(database Database) {
 
+	int i = 0;
 
-    int i = 0;
+	printf(
+			"\n\n\n\n\n\t ****************************** COLLEGAMENTI BRANOGENERE ****************************** \n\n");
 
-    if ( VerificaCollegamentoBranoGenere(  IdBrano ,  Database ) == VERO ) {
+	i = 0;
+	while (Database.BranoGenere[i].idBrano != SENTINELLA) {
 
+		printf("\n\n\t\t [BRANO] %s <--->  %s [GENERE] \n",
+				Database.Brano[Database.BranoGenere[i].idBrano].titolo,
+				Database.Genere[Database.BranoGenere[i].idGenere].nome);
 
-        /* ricerca della posizione del collegamento brano - genere presente */
+		i++;
+	}
 
-        i = 0;
-        while ( ( Database.BranoGenere[ i ].idBrano != SENTINELLA )  &&  ( Database.BranoGenere[ i ].idBrano != IdBrano )  ) {
-            i++;
-        }
+	printf(
+			"\n\n\t\t **************************************************************************** \n\n");
 
-        StampareInfoGenere( Database , Database.BranoGenere[ i ].idGenere );
-
-        Database.UltimoEsito = 0;
-
-    } else {
-
-        Database.UltimoEsito = 1;
-    }
-
-
-    return ;
+	return;
 
 }
 
-void StampareInfoBranoArtista( database Database ,int IdBrano ) {
+void VisualizzaPlaylistBrano(database Database) {
 
+	int i = 0;
 
-    int i = 0;
+	printf("\n\n\n\n\n\t COLLEGAMENTI PLAYLISTBRANO \n\n");
 
-    if( VerificaCollegamentoBranoArtista(  IdBrano ,  Database ) == VERO ) {
+	i = 0;
+	while (Database.PlaylistBrano[i].idBrano != SENTINELLA) {
 
+		printf("\n\n\t\t [BRANO] %s <--->  %s [PLAYLIST] \n",
+				Database.Brano[Database.PlaylistBrano[i].idBrano].titolo,
+				Database.Playlist[Database.PlaylistBrano[i].idPlaylist].nome);
 
-        /* ricerca della posizione del collegamento brano - genere presente */
-        i = 0;
-        while ( ( Database.BranoArtista[ i ].idBrano != SENTINELLA )  &&  ( Database.BranoArtista[ i ].idBrano != IdBrano )  ) {
-            i++;
-        }
+		i++;
+	}
 
-        StampareInfoArtista( Database , Database.BranoArtista[ i ].idArtista );
+	return;
+}
 
+void StampareInfoCollegamentiBrano(database Database, int IdBrano) {
 
-        Database.UltimoEsito = 0;
+	StamapareInfoBranoAlbum(Database, IdBrano);
+	StampareInfoBranoGenere(Database, IdBrano);
+	StampareInfoBranoArtista(Database, IdBrano);
+	StampareInfoBranoPlaylist(Database, IdBrano);
 
-    } else {
+	return;
+}
 
-        Database.UltimoEsito = 1;
-    }
+void StamapareInfoBranoAlbum(database Database, int IdBrano) {
 
+	int i = 0;
 
-    return ;
+	if (VerificaCollegamentoBranoAlbum(IdBrano, Database) == VERO) {
+
+		/* ricerca della posizione del collegamento brano - album presente */
+
+		i = 0;
+		while ((Database.BranoAlbum[i].idBrano != SENTINELLA)
+				&& (Database.BranoAlbum[i].idBrano != IdBrano)) {
+
+			i++;
+		}
+
+		StampareInfoAlbum(Database, Database.BranoAlbum[i].idAlbum);
+
+		Database.UltimoEsito = 0;
+
+	} else {
+
+		Database.UltimoEsito = 1;
+	}
+
+	return;
 
 }
 
-void StampareInfoBranoPlaylist( database Database ,int IdBrano ) {
+void StampareInfoBranoGenere(database Database, int IdBrano) {
 
+	int i = 0;
 
-    int i = 0;
+	if (VerificaCollegamentoBranoGenere(IdBrano, Database) == VERO) {
 
-    if( VerificaCollegamentoBranoPlaylist(  IdBrano ,  Database ) == VERO ) {
+		/* ricerca della posizione del collegamento brano - genere presente */
 
+		i = 0;
+		while ((Database.BranoGenere[i].idBrano != SENTINELLA)
+				&& (Database.BranoGenere[i].idBrano != IdBrano)) {
+			i++;
+		}
 
-        /* ricerca della posizione del collegamento brano - playlist presente */
+		StampareInfoGenere(Database, Database.BranoGenere[i].idGenere);
 
-    	i = 0;
-        while ( ( Database.PlaylistBrano[ i ].idBrano != SENTINELLA )  &&  ( Database.PlaylistBrano[ i ].idBrano != IdBrano )  ) {
-            i++;
-        }
+		Database.UltimoEsito = 0;
 
-        StampareInfoPlaylist( Database , Database.PlaylistBrano[ i ].idPlaylist );
+	} else {
 
+		Database.UltimoEsito = 1;
+	}
 
-        Database.UltimoEsito = 0;
-
-    } else {
-
-        Database.UltimoEsito = 1;
-    }
-
-
-
-
-    return ;
+	return;
 
 }
 
-void StampareInfoCollegamentiAlbum( database Database , int IdAlbum ) {
+void StampareInfoBranoArtista(database Database, int IdBrano) {
 
-    int i = 0;
+	int i = 0;
 
-    i = 0;
-    while (  Database.BranoAlbum[ i ].idBrano != SENTINELLA  ) {
+	if (VerificaCollegamentoBranoArtista(IdBrano, Database) == VERO) {
 
-            if( Database.BranoAlbum[ i ].idAlbum == IdAlbum ) {
+		/* ricerca della posizione del collegamento brano - genere presente */
+		i = 0;
+		while ((Database.BranoArtista[i].idBrano != SENTINELLA)
+				&& (Database.BranoArtista[i].idBrano != IdBrano)) {
+			i++;
+		}
 
-                /* stampa del brano */
+		StampareInfoArtista(Database, Database.BranoArtista[i].idArtista);
 
-                StampareInfoBrano( Database , Database.BranoAlbum[ i ].idBrano );
+		Database.UltimoEsito = 0;
 
-        }
+	} else {
 
-    i++;
+		Database.UltimoEsito = 1;
+	}
 
-    }
-
-    return ;
+	return;
 
 }
 
+void StampareInfoBranoPlaylist(database Database, int IdBrano) {
+
+	int i = 0;
+
+	if (VerificaCollegamentoBranoPlaylist(IdBrano, Database) == VERO) {
+
+		/* ricerca della posizione del collegamento brano - playlist presente */
+
+		i = 0;
+		while ((Database.PlaylistBrano[i].idBrano != SENTINELLA)
+				&& (Database.PlaylistBrano[i].idBrano != IdBrano)) {
+			i++;
+		}
+
+		StampareInfoPlaylist(Database, Database.PlaylistBrano[i].idPlaylist);
+
+		Database.UltimoEsito = 0;
+
+	} else {
+
+		Database.UltimoEsito = 1;
+	}
+
+	return;
+
+}
+
+void StampareInfoCollegamentiAlbum(database Database, int IdAlbum) {
+
+	int i = 0;
+
+	i = 0;
+	while (Database.BranoAlbum[i].idBrano != SENTINELLA) {
+
+		if (Database.BranoAlbum[i].idAlbum == IdAlbum) {
+
+			/* stampa del brano */
+
+			StampareInfoBrano(Database, Database.BranoAlbum[i].idBrano);
+
+		}
+
+		i++;
+
+	}
+
+	return;
+
+}
 
 /* stampa di tutti i collegamenti artista - brani */
 
-void StampareInfoCollegamentiArtista( database Database , int IdArtista ) {
+void StampareInfoCollegamentiArtista(database Database, int IdArtista) {
 
-    int i = 0;
+	int i = 0;
 
-    i = 0;
-    while (   Database.BranoArtista[ i ].idBrano != SENTINELLA  ) {
+	i = 0;
+	while (Database.BranoArtista[i].idBrano != SENTINELLA) {
 
-            if( Database.BranoArtista[ i ].idArtista == IdArtista ) {
+		if (Database.BranoArtista[i].idArtista == IdArtista) {
 
-                /* stampa del brano */
+			/* stampa del brano */
 
-                StampareInfoBrano( Database , Database.BranoArtista[ i ].idBrano );
+			StampareInfoBrano(Database, Database.BranoArtista[i].idBrano);
 
-        }
+		}
 
-    i++;
+		i++;
 
-    }
+	}
 
-
-    return ;
+	return;
 
 }
 
-
 /* stampa di tutti i collegamenti genere - brani */
 
-void StampareInfoCollegamentiGenere( database Database , int IdGenere ) {
+void StampareInfoCollegamentiGenere(database Database, int IdGenere) {
 
-    int i = 0;
+	int i = 0;
 
-    i = 0;
-    while (   Database.BranoGenere[ i ].idBrano != SENTINELLA  ) {
+	i = 0;
+	while (Database.BranoGenere[i].idBrano != SENTINELLA) {
 
-            if( Database.BranoGenere[ i ].idGenere == IdGenere ) {
+		if (Database.BranoGenere[i].idGenere == IdGenere) {
 
-                /* stampa del brano */
+			/* stampa del brano */
 
-                StampareInfoBrano( Database , Database.BranoGenere[ i ].idBrano );
+			StampareInfoBrano(Database, Database.BranoGenere[i].idBrano);
 
-        }
+		}
 
-    i++;
+		i++;
 
-    }
+	}
 
-
-    return ;
+	return;
 
 }
 
 // stampa di tutti i collegamenti playlist - brani
 
-void StampareInfoCollegamentiPlaylist( database Database , int IdPlaylist ) {
+void StampareInfoCollegamentiPlaylist(database Database, int IdPlaylist) {
 
-    int i = 0;
+	int i = 0;
 
-    i = 0;
-    while (   Database.PlaylistBrano[ i ].idBrano != SENTINELLA  ) {
+	i = 0;
+	while (Database.PlaylistBrano[i].idBrano != SENTINELLA) {
 
-            if ( Database.PlaylistBrano[ i ].idPlaylist == IdPlaylist ) {
+		if (Database.PlaylistBrano[i].idPlaylist == IdPlaylist) {
 
-                /* stampa del brano */
+			/* stampa del brano */
 
-                StampareInfoBrano( Database , Database.PlaylistBrano[ i ].idBrano );
+			StampareInfoBrano(Database, Database.PlaylistBrano[i].idBrano);
 
-        }
+		}
 
-    i++;
+		i++;
 
-    }
+	}
 
-
-    return ;
+	return;
 
 }

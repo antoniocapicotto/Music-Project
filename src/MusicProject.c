@@ -1,14 +1,14 @@
 // Libreria
-#include "MusicProject.h"
+#include "./../include/MusicProject.h"
 
 int main() {
 
 	/*  ============================= DICHIARAZIONI VARIABILI ============================= */
 
 	database Database;      // database nel quale verranno caricati tutti i dati
-	char scelta[1];       // variabile utilizzata per il menù a scelta multipla
-	int controllo_stato_caricamento = 0; // variabile che indica se è necessaria l'installazione dei file
-	int controllo_stato_backup = 0; // variabile che controlla se è presente un backup
+	char scelta[1];       // variabile utilizzata per il menï¿½ a scelta multipla
+	int controllo_stato_caricamento = 0; // variabile che indica se ï¿½ necessaria l'installazione dei file
+	int controllo_stato_backup = 0; // variabile che controlla se ï¿½ presente un backup
 
 	/* ================================= FASE DI INSTALLAZIONE ===================================== */
 
@@ -34,9 +34,7 @@ int main() {
 			scanf(" %[^\n]", scelta);
 
 			if (strcmp(scelta, "1") == 0) {
-
 				Database = CaricareSuFile(Database);
-
 				strcpy(scelta, "0");
 
 			} else if (strcmp(scelta, "2") == 0) {

@@ -17,7 +17,7 @@
 #include "stampare_collegamenti.h"
 
 #include "backup_collegamenti.h"
-#include "MusicProject.h"
 
+#include "./../MusicProject.h"
 
 #endif /* COLLEGAMENTI_H_ */

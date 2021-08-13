@@ -1,210 +1,191 @@
-
 //Libreria
-#include "MusicProject.h"
-
+#include "./../include/MusicProject.h"
 
 // Funzione che verifica che esistano collegamenti tra brano e album da cancellare
 
-int VerificaCollegamentoBranoAlbum( int  IdBrano , database Database ) {
+int VerificaCollegamentoBranoAlbum(int IdBrano, database Database) {
 
-    int trovato = FALSO;
-    int i = 0;
+	int trovato = FALSO;
+	int i = 0;
 
-    i = 0;
-    while ( ( Database.BranoAlbum[ i ].idBrano != SENTINELLA ) && ( trovato != VERO ) ) {
+	i = 0;
+	while ((Database.BranoAlbum[i].idBrano != SENTINELLA) && (trovato != VERO)) {
 
-        if ( Database.BranoAlbum[ i ].idBrano == IdBrano ) {
+		if (Database.BranoAlbum[i].idBrano == IdBrano) {
 
-            trovato = VERO;
-        }
+			trovato = VERO;
+		}
 
-    i = i + 1;
+		i = i + 1;
 
-    }
+	}
 
-    return trovato;
+	return trovato;
 
 }
 
-
-
 // Funzione che verifica che ci sia un collegamento tra brano e genere da cancellare
 
- int VerificaCollegamentoBranoGenere( int IdBrano , database Database ) {
+int VerificaCollegamentoBranoGenere(int IdBrano, database Database) {
 
-    int trovato = FALSO;
-    int i = 0;
+	int trovato = FALSO;
+	int i = 0;
 
-    i = 0;
-    while( ( Database.BranoGenere[ i ].idBrano != SENTINELLA ) && ( trovato != VERO ) ) {
+	i = 0;
+	while ((Database.BranoGenere[i].idBrano != SENTINELLA) && (trovato != VERO)) {
 
-        if( Database.BranoGenere[ i ].idBrano == IdBrano ) {
+		if (Database.BranoGenere[i].idBrano == IdBrano) {
 
-            trovato = VERO;
-        }
+			trovato = VERO;
+		}
 
-    i = i + 1;
+		i = i + 1;
 
-    }
+	}
 
+	return trovato;
 
-    return trovato;
+}
 
-  }
+// Funzione che verifica che ci sia un collegamento tra brano e playlist da cancellare
 
+int VerificaCollegamentoBranoPlaylist(int IdBrano, database Database) {
 
- // Funzione che verifica che ci sia un collegamento tra brano e playlist da cancellare
+	int trovato = FALSO;
 
- int VerificaCollegamentoBranoPlaylist( int IdBrano , database Database ) {
+	int i = 0;
 
-     int trovato = FALSO;
+	i = 0;
+	while ((Database.PlaylistBrano[i].idBrano != SENTINELLA)
+			&& (trovato != VERO)) {
 
-     int i = 0;
+		if (Database.PlaylistBrano[i].idBrano == IdBrano) {
 
-     i = 0;
-     while( ( Database.PlaylistBrano[ i ].idBrano != SENTINELLA ) && ( trovato != VERO ) ) {
+			trovato = VERO;
+		}
 
-         if( Database.PlaylistBrano[ i ].idBrano == IdBrano ) {
+		i = i + 1;
 
-             trovato = VERO;
-         }
+	}
 
-     i = i + 1;
+	return trovato;
 
-     }
+}
 
+// Funzione che verifica che ci sia un collegamento tra brano e artista da cancellare
 
-     return trovato;
+int VerificaCollegamentoBranoArtista(int IdBrano, database Database) {
 
- }
+	int trovato = 0;
 
+	int i = 0;
 
+	i = 0;
+	while ((Database.BranoArtista[i].idBrano != SENTINELLA) && (trovato != VERO)) {
 
- // Funzione che verifica che ci sia un collegamento tra brano e artista da cancellare
+		if (Database.BranoArtista[i].idBrano == IdBrano) {
 
- int VerificaCollegamentoBranoArtista( int  IdBrano ,database Database ) {
+			trovato = VERO;
+		}
 
-     int trovato = 0;
+		i = i + 1;
 
-     int i = 0;
+	}
 
-     i = 0;
-     while ( ( Database.BranoArtista[ i ].idBrano != SENTINELLA ) && ( trovato != VERO ) ) {
+	return trovato;
 
-         if ( Database.BranoArtista[ i ].idBrano == IdBrano ) {
+}
 
-             trovato = VERO;
-         }
+// Funzione che verifica che ci sia un collegamento tra album e piï¿½ brani da cancellare
 
-     i = i + 1;
+int VerificaCollegamentoAlbumBrani(int IdAlbum, database Database) {
 
-     }
+	int trovato = FALSO;
+	int i = 0;
 
-     return trovato;
+	i = 0;
+	while ((Database.BranoAlbum[i].idBrano != SENTINELLA) && (trovato != VERO)) {
 
- }
+		if (Database.BranoAlbum[i].idAlbum == IdAlbum) {
 
+			trovato = VERO;
+		}
 
- // Funzione che verifica che ci sia un collegamento tra album e più brani da cancellare
+		i = i + 1;
 
- int VerificaCollegamentoAlbumBrani( int IdAlbum , database Database ) {
+	}
 
-     int trovato = FALSO;
-     int i = 0;
+	return trovato;
 
-     i = 0;
-     while ( ( Database.BranoAlbum[ i ].idBrano != SENTINELLA ) && ( trovato != VERO ) ) {
+}
 
-         if ( Database.BranoAlbum[ i ].idAlbum == IdAlbum ) {
+// Funzione che verifica che ci siano collegamenti tra artista e brano da cancellare
 
-             trovato = VERO;
-         }
+int VerificaCollegamentoArtistaBrani(int IdArtista, database Database) {
 
-     i = i + 1;
+	int trovato = FALSO;
+	int i = 0;
 
-     }
+	i = 0;
+	while ((Database.BranoArtista[i].idBrano != SENTINELLA) && (trovato != VERO)) {
 
+		if (Database.BranoArtista[i].idArtista == IdArtista) {
 
-     return trovato;
+			trovato = VERO;
+		}
 
- }
+		i = i + 1;
 
+	}
 
+	return trovato;
 
+}
 
+// Funzione che verifica che ci siano collegamenti tra playlist e brano da cancellare
 
+int VerificaCollegamentoPlaylistBrani(int IdPlaylist, database Database) {
 
- // Funzione che verifica che ci siano collegamenti tra artista e brano da cancellare
+	int trovato = FALSO;
+	int i = 0;
 
- int VerificaCollegamentoArtistaBrani( int IdArtista , database Database ) {
+	i = 0;
+	while ((Database.PlaylistBrano[i].idBrano != SENTINELLA)
+			&& (trovato != VERO)) {
 
-     int trovato = FALSO;
-     int i = 0;
+		if (Database.PlaylistBrano[i].idPlaylist == IdPlaylist) {
 
-     i = 0;
-     while ( ( Database.BranoArtista[ i ].idBrano != SENTINELLA ) && ( trovato != VERO ) ) {
+			trovato = VERO;
+		}
 
-         if ( Database.BranoArtista[ i ].idArtista == IdArtista ) {
+		i = i + 1;
 
-             trovato = VERO;
-         }
+	}
 
-     i = i + 1;
+	return trovato;
 
-     }
+}
 
+// Funzione che verifica che ci siano collegamenti tra genere e brano da cancellare
 
-     return trovato;
+int VerificaCollegamentoGenereBrani(int IdGenere, database Database) {
 
- }
+	int trovato = FALSO;
+	int i = 0;
 
+	i = 0;
+	while ((Database.BranoGenere[i].idBrano != SENTINELLA) && (trovato != VERO)) {
 
- // Funzione che verifica che ci siano collegamenti tra playlist e brano da cancellare
+		if (Database.BranoGenere[i].idGenere == IdGenere) {
 
- int VerificaCollegamentoPlaylistBrani( int IdPlaylist , database Database ) {
+			trovato = VERO;
+		}
 
-     int trovato = FALSO;
-     int i = 0;
+		i = i + 1;
 
-     i = 0;
-     while ( ( Database.PlaylistBrano[ i ].idBrano != SENTINELLA ) && ( trovato != VERO ) ) {
+	}
 
-         if ( Database.PlaylistBrano[ i ].idPlaylist == IdPlaylist ) {
+	return trovato;
 
-             trovato = VERO;
-         }
-
-     i = i + 1;
-
-     }
-
-
-     return trovato;
-
- }
-
-
- // Funzione che verifica che ci siano collegamenti tra genere e brano da cancellare
-
- int VerificaCollegamentoGenereBrani( int IdGenere , database Database ) {
-
-     int trovato = FALSO;
-     int i = 0;
-
-     i = 0;
-     while ( ( Database.BranoGenere[ i ].idBrano != SENTINELLA ) && ( trovato != VERO ) ) {
-
-         if ( Database.BranoGenere[ i ].idGenere == IdGenere ) {
-
-             trovato = VERO;
-         }
-
-     i = i + 1;
-
-     }
-
-
-     return trovato;
-
- }
+}
 

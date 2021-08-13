@@ -1,608 +1,615 @@
-
 //Libreria
-#include "MusicProject.h"
+#include "./../include/MusicProject.h"
 
+void ModificaStringa(char stringa[]) {
 
+	int i = 0;
 
-void ModificaStringa( char stringa[] ) {
+	i = 0;
+	while (stringa[i] != FINESTRINGA) {
 
-    int i = 0;
+		stringa[i] = toupper(stringa[i]);
 
+		i++;
+	}
 
-    i = 0;
-    while ( stringa[i] != FINESTRINGA ) {
-
-        stringa[i] = toupper( stringa[ i ] );
-
-        i++;
-    }
-
-	return ;
+	return;
 
 }
 
 // =============================================  BRANO ==================================================
 
-database ModificareBrano( database Database ) {
+database ModificareBrano(database Database) {
 
-    char scelta[20];
-    int IdBrano = 0;
-    Brano BranoModificato;
+	char scelta[20];
+	int IdBrano = 0;
+	Brano BranoModificato;
 
-    VisualizzaBrani( Database );
+	VisualizzaBrani(Database);
 
-    Database = ModificaDatiBrano( BranoModificato , Database , IdBrano );
+	Database = ModificaDatiBrano(BranoModificato, Database, IdBrano);
 
-    while ( Database.UltimoEsito != 0  ) {
+	while (Database.UltimoEsito != 0) {
 
-    printf( "\n\n\n\t\t SCELTA: " );
-    scanf( " %[^\n]" , scelta );
+		printf("\n\n\n\t\t SCELTA: ");
+		scanf(" %[^\n]", scelta);
 
-    if ( strcmp( scelta , "1" ) == 0 ) {
+		if (strcmp(scelta, "1") == 0) {
 
-    VisualizzaBrani( Database );
+			VisualizzaBrani(Database);
 
-    Database = ModificaDatiBrano(  BranoModificato , Database , IdBrano );
+			Database = ModificaDatiBrano(BranoModificato, Database, IdBrano);
 
-    } else if ( strcmp( scelta, "2" ) == 0 ) {
+		} else if (strcmp(scelta, "2") == 0) {
 
-        Database.UltimoEsito = 0;
+			Database.UltimoEsito = 0;
 
-        }
+		}
 
-    }
+	}
 
-
-      return Database;
+	return Database;
 }
 
-database ModificaDatiBrano( Brano BranoModificato , database Database , int IdBrano ) {
+database ModificaDatiBrano(Brano BranoModificato, database Database,
+		int IdBrano) {
 
-  printf( "\n\n\n\n\t\t ###################### ID BRANO DA MODIFICARE ###################### \n\n" );
-  printf("\n\n\n\t\t ID: ");
-  scanf( "%d" , &IdBrano );
+	printf(
+			"\n\n\n\n\t\t ###################### ID BRANO DA MODIFICARE ###################### \n\n");
+	printf("\n\n\n\t\t ID: ");
+	scanf("%d", &IdBrano);
 
-  // verifica dell'id che sia corretto
+	// verifica dell'id che sia corretto
 
-  if ( VerificaIdBrano( Database , IdBrano ) == FALSO ) {
+	if (VerificaIdBrano(Database, IdBrano) == FALSO) {
 
-	  Database.UltimoEsito = 1;
-	  printf("\n\n\n\n\t\t ++++++++++++++++ ID BRANO INESISTENTE ++++++++++++++++ \n\n\t\t [1] MODIFICA UN ALTRO BRANO \n\n\t\t [2] NO " );
+		Database.UltimoEsito = 1;
+		printf(
+				"\n\n\n\n\t\t ++++++++++++++++ ID BRANO INESISTENTE ++++++++++++++++ \n\n\t\t [1] MODIFICA UN ALTRO BRANO \n\n\t\t [2] NO ");
 
-  } else {
-
-
-  do {
-
-        printf( "\n\t MODIFICA TITOLO: " );
-        scanf( " %[^\n]" , BranoModificato.titolo );
-        ModificaStringa( BranoModificato.titolo );
-
-  } while ( ( strlen( BranoModificato.titolo ) >= 30 ) || ( strlen( BranoModificato.titolo ) < 0 ) );
-
-
-  do {
-
-      	 printf( "\n\t MODIFICA ANNO: " );
-         scanf( "%d" , &BranoModificato.anno );
-
-  } while ( BranoModificato.anno < 1900 );
-
-
-  if( TrovaIdBrano( Database , BranoModificato.titolo , BranoModificato.anno ) != SENTINELLA ){
-
-	  Database.UltimoEsito = 1;
-	  printf("\n\n\n\n\n\t\t +++++++++++++++ BRANO GIA' ESISTENTE +++++++++++++++ \n\n\t\t [1] MODIFICA UN ALTRO BRANO \n\n\t\t [2] NO " );
-
-  }else{
-
-		// verifica che il brano che si intende aggiungere non sia già presente
-
-		Database = CancellareCollegamentiBrano( IdBrano ,  Database );
+	} else {
 
 		do {
 
-			printf( "\n\t MODIFICA DURATA(sec): " );
-			scanf( "%d" , &BranoModificato.durata );
+			printf("\n\t MODIFICA TITOLO: ");
+			scanf(" %[^\n]", BranoModificato.titolo);
+			ModificaStringa(BranoModificato.titolo);
 
-		} while ( BranoModificato.durata <= 0 );
+		} while ((strlen(BranoModificato.titolo) >= 30)
+				|| (strlen(BranoModificato.titolo) < 0));
 
 		do {
 
-			printf( "\n\t MODIFICA ASCOLTI: " );
-			scanf( "%d" , &BranoModificato.ascolti );
+			printf("\n\t MODIFICA ANNO: ");
+			scanf("%d", &BranoModificato.anno);
 
-		} while ( BranoModificato.ascolti < 0 );
+		} while (BranoModificato.anno < 1900);
 
+		if (TrovaIdBrano(Database, BranoModificato.titolo,
+				BranoModificato.anno) != SENTINELLA) {
+
+			Database.UltimoEsito = 1;
+			printf(
+					"\n\n\n\n\n\t\t +++++++++++++++ BRANO GIA' ESISTENTE +++++++++++++++ \n\n\t\t [1] MODIFICA UN ALTRO BRANO \n\n\t\t [2] NO ");
+
+		} else {
+
+			// verifica che il brano che si intende aggiungere non sia giï¿½ presente
+
+			Database = CancellareCollegamentiBrano(IdBrano, Database);
+
+			do {
+
+				printf("\n\t MODIFICA DURATA(sec): ");
+				scanf("%d", &BranoModificato.durata);
+
+			} while (BranoModificato.durata <= 0);
+
+			do {
+
+				printf("\n\t MODIFICA ASCOLTI: ");
+				scanf("%d", &BranoModificato.ascolti);
+
+			} while (BranoModificato.ascolti < 0);
 
 			BranoModificato.idBrano = IdBrano;
 
-			Database.Brano[ BranoModificato.idBrano ] = BranoModificato;
+			Database.Brano[BranoModificato.idBrano] = BranoModificato;
 
-			Database = CreareCollegamentiBrano( BranoModificato , Database );
+			Database = CreareCollegamentiBrano(BranoModificato, Database);
 
 			Database.UltimoEsito = 0;
-	  }
+		}
 
-  }
+	}
 
-    return Database;
+	return Database;
 }
 
+database ModificareAlbum(database Database) {
 
-database ModificareAlbum( database Database ) {
+	char scelta[20];
+	int IdAlbum = 0;
+	Album AlbumModificato;
 
-    char scelta[20];
-    int IdAlbum = 0;
-    Album AlbumModificato;
+	VisualizzaAlbum(Database);
 
-    VisualizzaAlbum( Database );
+	Database = ModificaDatiAlbum(AlbumModificato, Database, IdAlbum);
 
-    Database = ModificaDatiAlbum( AlbumModificato , Database , IdAlbum );
+	while (Database.UltimoEsito != 0) {
 
-    while ( Database.UltimoEsito != 0  ) {
+		printf(
+				"\n\n\n\n\n\t\t ++++++++++++++++++++ ID INESISTENTE O ALBUM GIA' PRESENTE +++++++++++++++++ \n\n\t\t [1] MODIFICA UN ALTRO ALBUM \n\n\t\t [2] NO ");
+		printf("\n\n\n\t\t SCELTA: ");
+		scanf(" %[^\n]", scelta);
 
-    printf("\n\n\n\n\n\t\t ++++++++++++++++++++ ID INESISTENTE O ALBUM GIA' PRESENTE +++++++++++++++++ \n\n\t\t [1] MODIFICA UN ALTRO ALBUM \n\n\t\t [2] NO " );
-    printf( "\n\n\n\t\t SCELTA: " );
-    scanf( " %[^\n]" , scelta );
+		if (strcmp(scelta, "1") == 0) {
 
-    if ( strcmp( scelta , "1" ) == 0 ) {
+			VisualizzaAlbum(Database);
 
-    VisualizzaAlbum( Database );
+			Database = ModificaDatiAlbum(AlbumModificato, Database, IdAlbum);
 
-    Database = ModificaDatiAlbum(  AlbumModificato , Database , IdAlbum );
+		} else if (strcmp(scelta, "2") == 0) {
 
-    } else if ( strcmp( scelta, "2" ) == 0 ) {
+			Database.UltimoEsito = 0;
 
-        Database.UltimoEsito = 0;
+		}
 
-        }
+	}
 
-    }
-
-
-      return Database;
+	return Database;
 }
 
-database ModificaDatiAlbum( Album AlbumModificato , database Database , int IdAlbum ) {
+database ModificaDatiAlbum(Album AlbumModificato, database Database,
+		int IdAlbum) {
 
-  printf( "\n\n\n\n\t\t ########################### ID ALBUM DA MODIFICARE ########################### " );
-  printf("\n\n\n\t\t ID: ");
-  scanf( "%d" , &IdAlbum );
+	printf(
+			"\n\n\n\n\t\t ########################### ID ALBUM DA MODIFICARE ########################### ");
+	printf("\n\n\n\t\t ID: ");
+	scanf("%d", &IdAlbum);
 
-  if ( VerificaIdAlbum( Database , IdAlbum ) == FALSO ) {
+	if (VerificaIdAlbum(Database, IdAlbum) == FALSO) {
 
-	  Database.UltimoEsito = 1;
+		Database.UltimoEsito = 1;
 
-  }else{
+	} else {
 
-  do {
+		do {
 
-        printf( "\n\t\t MODIFICA TITOLO: " );
-        scanf( " %[^\n]" , AlbumModificato.titolo );
-        ModificaStringa( AlbumModificato.titolo );
+			printf("\n\t\t MODIFICA TITOLO: ");
+			scanf(" %[^\n]", AlbumModificato.titolo);
+			ModificaStringa(AlbumModificato.titolo);
 
-  } while( ( strlen( AlbumModificato.titolo ) >= 30 ) || ( strlen( AlbumModificato.titolo ) < 0 ) );
+		} while ((strlen(AlbumModificato.titolo) >= 30)
+				|| (strlen(AlbumModificato.titolo) < 0));
 
+		do {
 
-  do {
+			printf("\n\t\t MODIFICA ANNO: ");
+			scanf("%d", &AlbumModificato.anno);
 
-        printf( "\n\t\t MODIFICA ANNO: " );
-        scanf( "%d" , &AlbumModificato.anno );
+		} while (AlbumModificato.anno < 1900);
 
-  } while ( AlbumModificato.anno < 1900 );
+		if (TrovaIdAlbum(Database, AlbumModificato.titolo,
+				AlbumModificato.anno) != SENTINELLA) {
 
+			Database.UltimoEsito = 1;
 
-  if ( TrovaIdAlbum( Database , AlbumModificato.titolo , AlbumModificato.anno ) != SENTINELLA  ) {
+		} else {
 
- 	Database.UltimoEsito = 1;
+			Database = CancellaCollegamentiAlbumBrani(IdAlbum, Database);
 
-  } else {
+			AlbumModificato.idAlbum = IdAlbum;
 
-        Database = CancellaCollegamentiAlbumBrani( IdAlbum ,  Database );
+			Database.Album[AlbumModificato.idAlbum] = AlbumModificato;
 
-        AlbumModificato.idAlbum = IdAlbum;
+			Database = CreareCollegamentiAlbumBrani(Database, AlbumModificato);
 
-        Database.Album[ AlbumModificato.idAlbum ] = AlbumModificato;
+			Database.UltimoEsito = 0;
 
-        Database = CreareCollegamentiAlbumBrani( Database ,  AlbumModificato );
+		}
 
-        Database.UltimoEsito = 0;
+	}
 
-  }
-
-  }
-
-    return Database;
+	return Database;
 }
 
-database ModificareGenere( database Database ) {
+database ModificareGenere(database Database) {
 
-    char scelta[20];
-    int IdGenere = 0;
-    Genere GenereModificato;
+	char scelta[20];
+	int IdGenere = 0;
+	Genere GenereModificato;
 
-    VisualizzaGeneri( Database );
+	VisualizzaGeneri(Database);
 
-    Database = ModificaDatiGenere( GenereModificato , Database , IdGenere );
+	Database = ModificaDatiGenere(GenereModificato, Database, IdGenere);
 
-    while ( Database.UltimoEsito != 0  ) {
+	while (Database.UltimoEsito != 0) {
 
-    printf( "\n\n\n\n\n\t ++++++++++++ ID INESISTENTE O GENERE GIA' PRESENTE ++++++++++++ \n\n\t\t [1] MODIFICARE UN ALTRO GENERE \n\n\t\t [2] NO " );
+		printf(
+				"\n\n\n\n\n\t ++++++++++++ ID INESISTENTE O GENERE GIA' PRESENTE ++++++++++++ \n\n\t\t [1] MODIFICARE UN ALTRO GENERE \n\n\t\t [2] NO ");
 
-    printf( "\n\n\n\t\t SCELTA: " );
+		printf("\n\n\n\t\t SCELTA: ");
 
-    scanf( " %[^\n]" , scelta );
+		scanf(" %[^\n]", scelta);
 
-    if ( strcmp( scelta , "1" ) == 0 ) {
+		if (strcmp(scelta, "1") == 0) {
 
-    VisualizzaGeneri( Database );
+			VisualizzaGeneri(Database);
 
-    Database = ModificaDatiGenere(  GenereModificato , Database , IdGenere );
+			Database = ModificaDatiGenere(GenereModificato, Database, IdGenere);
 
-    } else if ( strcmp( scelta, "2" ) == 0 ) {
+		} else if (strcmp(scelta, "2") == 0) {
 
+			Database.UltimoEsito = 0;
 
-        Database.UltimoEsito = 0;
+		}
 
-        }
+	}
 
-    }
-
-
-      return Database;
+	return Database;
 }
 
-database ModificaDatiGenere( Genere GenereModificato , database Database , int IdGenere ) {
+database ModificaDatiGenere(Genere GenereModificato, database Database,
+		int IdGenere) {
 
-  printf( "\n\n\n\n\t\t ###################### ID GENERE DA MODIFICARE ###################### " );
-  printf("\n\n\n\t\t ID: ");
-  scanf( "%d" , &IdGenere );
+	printf(
+			"\n\n\n\n\t\t ###################### ID GENERE DA MODIFICARE ###################### ");
+	printf("\n\n\n\t\t ID: ");
+	scanf("%d", &IdGenere);
 
-  if ( VerificaIdGenere( Database , IdGenere ) == FALSO ) {
+	if (VerificaIdGenere(Database, IdGenere) == FALSO) {
 
-	  Database.UltimoEsito = 1;
+		Database.UltimoEsito = 1;
 
-  } else {
+	} else {
 
-  do {
+		do {
 
-        printf( "\n\t\t MODIFICA NOME: " );
-        scanf( " %[^\n]" , GenereModificato.nome );
-        ModificaStringa( GenereModificato.nome );
+			printf("\n\t\t MODIFICA NOME: ");
+			scanf(" %[^\n]", GenereModificato.nome);
+			ModificaStringa(GenereModificato.nome);
 
-  } while( ( strlen( GenereModificato.nome ) >= 30 ) || ( strlen( GenereModificato.nome ) < 0 ) );
+		} while ((strlen(GenereModificato.nome) >= 30)
+				|| (strlen(GenereModificato.nome) < 0));
 
-    if ( TrovaIdGenere(Database,GenereModificato.nome) != SENTINELLA ) {
+		if (TrovaIdGenere(Database, GenereModificato.nome) != SENTINELLA) {
 
- 	Database.UltimoEsito = 1;
+			Database.UltimoEsito = 1;
 
-  } else {
+		} else {
 
-        Database = CancellaCollegamentiGenereBrani( IdGenere ,  Database );
+			Database = CancellaCollegamentiGenereBrani(IdGenere, Database);
 
-        GenereModificato.idGenere = IdGenere;
+			GenereModificato.idGenere = IdGenere;
 
-        Database.Genere[ GenereModificato.idGenere ] = GenereModificato;
+			Database.Genere[GenereModificato.idGenere] = GenereModificato;
 
-        Database = CreareCollegamentiGenereBrani( Database , GenereModificato );
+			Database = CreareCollegamentiGenereBrani(Database,
+					GenereModificato);
 
-        Database.UltimoEsito = 0;
+			Database.UltimoEsito = 0;
 
-  	  }
+		}
 
-  }
+	}
 
-    return Database;
+	return Database;
 }
 
-database ModificarePlaylist( database Database ) {
+database ModificarePlaylist(database Database) {
 
-    char scelta[20];
-    int IdPlaylist = 0;
-    Playlist PlaylistModificata;
+	char scelta[20];
+	int IdPlaylist = 0;
+	Playlist PlaylistModificata;
 
-    VisualizzaPlaylist( Database );
+	VisualizzaPlaylist(Database);
 
-    Database = ModificaDatiPlaylist(  PlaylistModificata , Database , IdPlaylist );
+	Database = ModificaDatiPlaylist(PlaylistModificata, Database, IdPlaylist);
 
-    while ( Database.UltimoEsito != 0  ) {
+	while (Database.UltimoEsito != 0) {
 
-    printf( "\n\n\n\n\t\t ++++++++++++ ID PLAYLIST INESISTENTE O PLAYLIST GIA' PRESENTE ++++++++++++ \n\n\t\t [1] MODIFICARE UN ALTRA PLAYLIST \n\n\t\t [0] ESCI " );
+		printf(
+				"\n\n\n\n\t\t ++++++++++++ ID PLAYLIST INESISTENTE O PLAYLIST GIA' PRESENTE ++++++++++++ \n\n\t\t [1] MODIFICARE UN ALTRA PLAYLIST \n\n\t\t [0] ESCI ");
 
-    printf( "\n\n\n\t\t SCELTA: " );
+		printf("\n\n\n\t\t SCELTA: ");
 
-    scanf( " %[^\n]" , scelta );
+		scanf(" %[^\n]", scelta);
 
-    if ( strcmp( scelta , "1" ) == 0 ) {
+		if (strcmp(scelta, "1") == 0) {
 
-    VisualizzaPlaylist( Database );
+			VisualizzaPlaylist(Database);
 
-    Database = ModificaDatiPlaylist(  PlaylistModificata , Database , IdPlaylist );
+			Database = ModificaDatiPlaylist(PlaylistModificata, Database,
+					IdPlaylist);
 
-    } else if ( strcmp( scelta , "0" ) == 0 ) {
+		} else if (strcmp(scelta, "0") == 0) {
 
+			Database.UltimoEsito = 0;
 
-        Database.UltimoEsito = 0;
+		}
 
-        }
+	}
 
-    }
-
-
-      return Database;
+	return Database;
 }
 
-database ModificaDatiPlaylist( Playlist PlaylistModificata , database Database , int IdPlaylist ) {
+database ModificaDatiPlaylist(Playlist PlaylistModificata, database Database,
+		int IdPlaylist) {
 
-  int esito = FALSO;
+	int esito = FALSO;
 
-  printf( "\n\n\n\n\t\t ########################### ID PLAYLIST DA MODIFICARE ########################### " );
-  printf("\n\n\n\t\t ID: ");
-  scanf( "%d" , &IdPlaylist );
+	printf(
+			"\n\n\n\n\t\t ########################### ID PLAYLIST DA MODIFICARE ########################### ");
+	printf("\n\n\n\t\t ID: ");
+	scanf("%d", &IdPlaylist);
 
-  if( VerificaIdPlaylist(Database , IdPlaylist ) == FALSO ){
+	if (VerificaIdPlaylist(Database, IdPlaylist) == FALSO) {
 
-	  Database.UltimoEsito = 1;
+		Database.UltimoEsito = 1;
 
-  } else {
+	} else {
 
-  do {
+		do {
 
-        printf( "\n\t\t MODIFICA NOME: ");
+			printf("\n\t\t MODIFICA NOME: ");
 
-        scanf( " %[^\n]" , PlaylistModificata.nome );
+			scanf(" %[^\n]", PlaylistModificata.nome);
 
-        ModificaStringa( PlaylistModificata.nome );
+			ModificaStringa(PlaylistModificata.nome);
 
-  } while( ( strlen( PlaylistModificata.nome ) >= 30 ) || ( strlen( PlaylistModificata.nome ) < 0 ) );
+		} while ((strlen(PlaylistModificata.nome) >= 30)
+				|| (strlen(PlaylistModificata.nome) < 0));
 
+		while (esito != VERO) {
 
-  while ( esito != VERO ) {
+			printf("\n\t\t MODIFICA PUBBLICA( [1] SI - [0] NO ): ");
+			scanf("%d", &PlaylistModificata.pubblica);
 
-	  printf( "\n\t\t MODIFICA PUBBLICA( [1] SI - [0] NO ): " );
-	  scanf( "%d" , &PlaylistModificata.pubblica );
+			if ((PlaylistModificata.pubblica == 1)
+					|| (PlaylistModificata.pubblica == 0)) {
 
-	  if ( (PlaylistModificata.pubblica == 1) || (PlaylistModificata.pubblica == 0) ) {
+				esito = VERO;
 
-		  esito = VERO;
+			}
 
-	  }
+		}
 
-  }
+		if (TrovaIdPlaylist(Database, PlaylistModificata.nome,
+				PlaylistModificata.pubblica) != SENTINELLA) {
 
+			Database.UltimoEsito = 1;
 
-  if ( TrovaIdPlaylist(Database , PlaylistModificata.nome , PlaylistModificata.pubblica) != SENTINELLA ) {
+		} else {
 
- 	Database.UltimoEsito = 1;
+			Database = CancellaCollegamentiPlaylistBrani(IdPlaylist, Database);
 
-  } else {
+			do {
 
-        Database = CancellaCollegamentiPlaylistBrani( IdPlaylist ,  Database );
+				printf("\n\t\t MODIFICA DESCRIZIONE: ");
 
-        do {
+				scanf(" %[^\n]", PlaylistModificata.descrizione);
+				ModificaStringa(PlaylistModificata.descrizione);
 
-        printf( "\n\t\t MODIFICA DESCRIZIONE: " );
+			} while ((strlen(PlaylistModificata.descrizione) >= 250)
+					|| (strlen(PlaylistModificata.descrizione) < 0));
 
-        scanf( " %[^\n]" , PlaylistModificata.descrizione );
-        ModificaStringa( PlaylistModificata.descrizione );
+			PlaylistModificata.idPlaylist = IdPlaylist;
 
-        } while ( ( strlen( PlaylistModificata.descrizione ) >= 250 ) || ( strlen( PlaylistModificata.descrizione ) < 0  ) );
+			Database.Playlist[PlaylistModificata.idPlaylist] =
+					PlaylistModificata;
 
+			Database = CreareCollegamentiPlaylistBrani(Database,
+					PlaylistModificata);
 
-        PlaylistModificata.idPlaylist = IdPlaylist;
+			Database.UltimoEsito = 0;
 
-        Database.Playlist[ PlaylistModificata.idPlaylist ] = PlaylistModificata;
+		}
 
-        Database = CreareCollegamentiPlaylistBrani( Database , PlaylistModificata );
+	}
 
-
-        Database.UltimoEsito = 0;
-
-  	  }
-
-  }
-
-
-
-    return Database;
+	return Database;
 }
 
-database ModificareArtista( database Database ) {
+database ModificareArtista(database Database) {
 
-    char scelta[20];
-    int IdArtista = 0;
-    Artista ArtistaModificato;
+	char scelta[20];
+	int IdArtista = 0;
+	Artista ArtistaModificato;
 
-    VisualizzaArtisti( Database );
+	VisualizzaArtisti(Database);
 
-    Database = ModificaDatiArtista(  ArtistaModificato , Database , IdArtista );
+	Database = ModificaDatiArtista(ArtistaModificato, Database, IdArtista);
 
-    while ( Database.UltimoEsito != 0  ) {
+	while (Database.UltimoEsito != 0) {
 
-    printf( "\n\n\n\n\n\t ++++++++++++ ID ARTISTA NON PRESENTE O ARTISTA GIA' PRESENTE ++++++++++++ \n\n\t\t [1] MODIFICARE UN ALTRO ARTISTA \n\n\t\t [2] NO " );
-    printf( "\n\n\n\t\t SCELTA: " );
+		printf(
+				"\n\n\n\n\n\t ++++++++++++ ID ARTISTA NON PRESENTE O ARTISTA GIA' PRESENTE ++++++++++++ \n\n\t\t [1] MODIFICARE UN ALTRO ARTISTA \n\n\t\t [2] NO ");
+		printf("\n\n\n\t\t SCELTA: ");
 
-    scanf( " %[^\n]" , scelta );
+		scanf(" %[^\n]", scelta);
 
-    if ( strcmp( scelta , "1" ) == 0 ) {
+		if (strcmp(scelta, "1") == 0) {
 
-    VisualizzaArtisti( Database );
+			VisualizzaArtisti(Database);
 
-    Database = ModificaDatiArtista(  ArtistaModificato , Database , IdArtista );
+			Database = ModificaDatiArtista(ArtistaModificato, Database,
+					IdArtista);
 
-    } else if ( strcmp( scelta, "2" ) == 0 ) {
+		} else if (strcmp(scelta, "2") == 0) {
 
+			Database.UltimoEsito = 0;
 
-        Database.UltimoEsito = 0;
+		}
 
-        }
+	}
 
-    }
-
-
-      return Database;
+	return Database;
 }
 
-database ModificaDatiArtista( Artista ArtistaModificato , database Database , int IdArtista ) {
+database ModificaDatiArtista(Artista ArtistaModificato, database Database,
+		int IdArtista) {
 
-  printf( "\n\n\n\n\t\t ################# ID ARTISTA DA MODIFICARE ################# " );
+	printf(
+			"\n\n\n\n\t\t ################# ID ARTISTA DA MODIFICARE ################# ");
 
-  printf( "\n\n\n\t\t ID: ");
-  scanf( "%d" , &IdArtista );
+	printf("\n\n\n\t\t ID: ");
+	scanf("%d", &IdArtista);
 
-  if ( VerificaIdArtista(Database , IdArtista ) == FALSO ) {
+	if (VerificaIdArtista(Database, IdArtista) == FALSO) {
 
-	  Database.UltimoEsito = 1;
+		Database.UltimoEsito = 1;
 
-  } else {
+	} else {
 
-  do {
+		do {
 
-        printf( "\n\t\t MODIFICA NOME: " );
-        scanf( " %[^\n]" , ArtistaModificato.nome );
-        ModificaStringa( ArtistaModificato.nome );
+			printf("\n\t\t MODIFICA NOME: ");
+			scanf(" %[^\n]", ArtistaModificato.nome);
+			ModificaStringa(ArtistaModificato.nome);
 
-  } while( ( strlen( ArtistaModificato.nome ) >= 30 ) || ( strlen( ArtistaModificato.nome ) < 0 ) );
+		} while ((strlen(ArtistaModificato.nome) >= 30)
+				|| (strlen(ArtistaModificato.nome) < 0));
 
+		do {
 
-  do {
+			printf("\n\t\t MODIFICA COGNOME: ");
+			scanf(" %[^\n]", ArtistaModificato.cognome);
+			ModificaStringa(ArtistaModificato.cognome);
 
-        printf( "\n\t\t MODIFICA COGNOME: " );
-        scanf( " %[^\n]" , ArtistaModificato.cognome );
-        ModificaStringa( ArtistaModificato.cognome );
+		} while ((strlen(ArtistaModificato.cognome) >= 30)
+				|| (strlen(ArtistaModificato.cognome) < 0));
 
-  } while ( ( strlen( ArtistaModificato.cognome ) >= 30 ) || ( strlen( ArtistaModificato.cognome ) < 0  ) );
+		if (TrovaIdArtista(Database, ArtistaModificato.nome,
+				ArtistaModificato.cognome) != SENTINELLA) {
 
+			Database.UltimoEsito = 1;
 
-  if ( TrovaIdArtista(Database , ArtistaModificato.nome , ArtistaModificato.cognome) != SENTINELLA ) {
+		} else {
 
- 	Database.UltimoEsito = 1;
+			do {
 
-  } else {
+				printf("\n\t\t MODIFICA NOME ARTE: ");
+				scanf(" %[^\n]", ArtistaModificato.nomeArte);
+				ModificaStringa(ArtistaModificato.nomeArte);
 
-	  	do {
+			} while ((strlen(ArtistaModificato.cognome) >= 30)
+					|| (strlen(ArtistaModificato.cognome) < 0));
 
-	        printf( "\n\t\t MODIFICA NOME ARTE: " );
-	        scanf( " %[^\n]" , ArtistaModificato.nomeArte );
-	        ModificaStringa( ArtistaModificato.nomeArte );
+			Database = CancellaCollegamentiArtistaBrani(IdArtista, Database);
 
-	  	} while ( ( strlen( ArtistaModificato.cognome ) >= 30 ) || ( strlen( ArtistaModificato.cognome ) < 0  ) );
+			ArtistaModificato.idArtista = IdArtista;
 
-        Database = CancellaCollegamentiArtistaBrani( IdArtista ,  Database );
+			Database.Artista[ArtistaModificato.idArtista] = ArtistaModificato;
 
-        ArtistaModificato.idArtista = IdArtista;
+			Database = CreareCollegamentiArtistaBrani(Database,
+					ArtistaModificato);
 
-        Database.Artista[ ArtistaModificato.idArtista ] = ArtistaModificato;
+			Database.UltimoEsito = 0;
 
-        Database = CreareCollegamentiArtistaBrani( Database , ArtistaModificato );
+		}
 
+	}
 
-        Database.UltimoEsito = 0;
-
-  	  }
-
-  }
-
-    return Database;
+	return Database;
 }
 
-database ModificareUtente( database Database ) {
+database ModificareUtente(database Database) {
 
-    char scelta[20];
-    int IdUtente = 0;
-    Utente UtenteModificato;
+	char scelta[20];
+	int IdUtente = 0;
+	Utente UtenteModificato;
 
-    VisualizzaUtenti( Database );
+	VisualizzaUtenti(Database);
 
-    Database = ModificaDatiUtente(  UtenteModificato , Database , IdUtente );
+	Database = ModificaDatiUtente(UtenteModificato, Database, IdUtente);
 
-    while ( Database.UltimoEsito != 0  ) {
+	while (Database.UltimoEsito != 0) {
 
-    printf("\n\n\n\n\n\t\t ++++++++++++ ID UTENTE INESISTENTE O UTENTE GIA' PRESENTE ++++++++++++ \n\n\t\t [1] MODIFICARE UN ALTRO UTENTE \n\n\t\t [2] ESCI ");
+		printf(
+				"\n\n\n\n\n\t\t ++++++++++++ ID UTENTE INESISTENTE O UTENTE GIA' PRESENTE ++++++++++++ \n\n\t\t [1] MODIFICARE UN ALTRO UTENTE \n\n\t\t [2] ESCI ");
 
-    printf( "\n\n\n\t\t SCELTA: " );
-    scanf( " %[^\n]" , scelta );
+		printf("\n\n\n\t\t SCELTA: ");
+		scanf(" %[^\n]", scelta);
 
-    if ( strcmp( scelta , "1" ) == 0 ) {
+		if (strcmp(scelta, "1") == 0) {
 
-    VisualizzaUtenti( Database );
+			VisualizzaUtenti(Database);
 
-    Database = ModificaDatiUtente(  UtenteModificato , Database , IdUtente );
+			Database = ModificaDatiUtente(UtenteModificato, Database, IdUtente);
 
-    } else if ( strcmp( scelta, "2" ) == 0 ) {
+		} else if (strcmp(scelta, "2") == 0) {
 
+			Database.UltimoEsito = 0;
 
-        Database.UltimoEsito = 0;
+		}
 
-        }
+	}
 
-    }
-
-
-      return Database;
+	return Database;
 }
 
-database ModificaDatiUtente( Utente UtenteModificato , database Database , int IdUtente ) {
+database ModificaDatiUtente(Utente UtenteModificato, database Database,
+		int IdUtente) {
 
-  int esito = FALSO;
+	int esito = FALSO;
 
-  printf( "\n\n\n\n\t\t ################## ID UTENTE DA MODIFICARE ################## " );
-  printf("\n\n\n\t\t ID: ");
-  scanf( "%d" , &IdUtente );
+	printf(
+			"\n\n\n\n\t\t ################## ID UTENTE DA MODIFICARE ################## ");
+	printf("\n\n\n\t\t ID: ");
+	scanf("%d", &IdUtente);
 
-  if( VerificaIdUtente(Database,IdUtente) == FALSO ) {
+	if (VerificaIdUtente(Database, IdUtente) == FALSO) {
 
-	  Database.UltimoEsito = 1;
+		Database.UltimoEsito = 1;
 
-  }else{
+	} else {
 
-  do {
+		do {
 
-        printf( "\n\n\t\t USERNAME( Min 6 caratteri ): " );
-        scanf( " %[^\n]" , UtenteModificato.nomeUtente );
+			printf("\n\n\t\t USERNAME( Min 6 caratteri ): ");
+			scanf(" %[^\n]", UtenteModificato.nomeUtente);
 
-  } while( ( strlen( UtenteModificato.nomeUtente ) >= 60 ) || ( strlen( UtenteModificato.nomeUtente ) < 6 ) );
+		} while ((strlen(UtenteModificato.nomeUtente) >= 60)
+				|| (strlen(UtenteModificato.nomeUtente) < 6));
 
+		do {
 
-  do {
+			LeggerePassword(UtenteModificato.password);
 
-        LeggerePassword( UtenteModificato.password );
+		} while ((strlen(UtenteModificato.password) >= 30)
+				|| (strlen(UtenteModificato.password) < 6));
 
-  } while ( ( strlen( UtenteModificato.password ) >= 30 ) || ( strlen( UtenteModificato.password ) < 6  ) );
+		while (esito != VERO) {
 
+			printf("\n\n\t\t ADMIN( [1] SI - [0] NO ): ");
+			scanf("%d", &UtenteModificato.admin);
 
-  while ( esito != VERO ) {
+			if ((UtenteModificato.admin == 1)
+					|| (UtenteModificato.admin == 0)) {
 
-    printf( "\n\n\t\t ADMIN( [1] SI - [0] NO ): " );
-    scanf( "%d" , &UtenteModificato.admin );
+				esito = VERO;
+			}
 
-    if ( ( UtenteModificato.admin == 1 ) || ( UtenteModificato.admin == 0 ) ) {
+		}
 
-    	esito = VERO;
-    }
+		if (TrovaIdUtente(Database, UtenteModificato.nomeUtente,
+				UtenteModificato.password) != SENTINELLA) {
 
-  }
+			Database.UltimoEsito = 1;
 
+		} else {
 
+			UtenteModificato.idUtente = IdUtente;
 
-  if ( TrovaIdUtente(Database , UtenteModificato.nomeUtente , UtenteModificato.password ) != SENTINELLA ) {
+			Database.Utente[UtenteModificato.idUtente] = UtenteModificato;
 
- 	Database.UltimoEsito = 1;
+			Database.UltimoEsito = 0;
 
-  } else {
+		}
 
-        UtenteModificato.idUtente = IdUtente;
+	}
 
-        Database.Utente[ UtenteModificato.idUtente ] = UtenteModificato;
-
-        Database.UltimoEsito = 0;
-
-  	  }
-
-  }
-
-    return Database;
+	return Database;
 }
-
 
