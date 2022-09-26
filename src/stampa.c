@@ -2,211 +2,222 @@
 
 #include "./../include/MusicProject.h"
 
-void logo() {
+void logo()
+{
 
 	printf("\n\n\n\n\n\n\n\n\n\n\n");
 
 	printf("\t\t");
 	printf(
-			"   _____               .__         __________                   __               __    ");
+		"   _____               .__         __________                   __               __    ");
 	printf("\n");
 
 	printf("\t\t");
 	printf(
-			"  /     \\  __ __  _____|__| ____   \\______   \\_______  ____    |__| ____   _____/  |_  ");
+		"  /     \\  __ __  _____|__| ____   \\______   \\_______  ____    |__| ____   _____/  |_  ");
 	printf("\n");
 
 	printf("\t\t");
 	printf(
-			" /  \\ /  \\|  |  \\/  ___/  |/ ___\\   |     ___/\\_  __ \\/  _ \\   |  |/ __ \\_/ ___\\   __\\ ");
+		" /  \\ /  \\|  |  \\/  ___/  |/ ___\\   |     ___/\\_  __ \\/  _ \\   |  |/ __ \\_/ ___\\   __\\ ");
 	printf("\n");
 
 	printf("\t\t");
 	printf(
-			"/    Y    \\  |  /\\___ \\|  \\  \\___   |    |     |  | \\(  <_> )  |  \\  ___/\\  \\___|  |   ");
+		"/    Y    \\  |  /\\___ \\|  \\  \\___   |    |     |  | \\(  <_> )  |  \\  ___/\\  \\___|  |   ");
 	printf("\n");
 
 	printf("\t\t");
 	printf(
-			"\\____|__  /____//____  >__|\\___  >  |____|     |__|   \\____/\\__|  |\\___  >\\___  >__|   ");
+		"\\____|__  /____//____  >__|\\___  >  |____|     |__|   \\____/\\__|  |\\___  >\\___  >__|   ");
 	printf("\n");
 
 	printf("\t\t");
 	printf(
-			"        \\/           \\/        \\/                          \\______|    \\/     \\/       ");
+		"        \\/           \\/        \\/                          \\______|    \\/     \\/       ");
 	printf("\n");
 
 	return;
 }
 
-void VisualizzaBrani(database Database) {
+void VisualizzaBrani(database Database)
+{
 
 	int i = 0;
 
 	printf(
-			"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t ********************************* BRANI ************************************ \n\n");
+		"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t ********************************* BRANI ************************************ \n\n");
 
-	while (Database.Brano[i].idBrano != SENTINELLA) {
+	while (Database.Brano[i].idBrano != SENTINELLA)
+	{
 
 		printf(
-				"\n\n\t\t TITOLO: %s \n\t\t ANNO: %d \n\t\t DURATA: %d \n\t\t ASCOLTI: %d \n\t\t IDBRANO: %d \n",
-				Database.Brano[i].titolo, Database.Brano[i].anno,
-				Database.Brano[i].durata, Database.Brano[i].ascolti,
-				Database.Brano[i].idBrano);
+			"\n\n\t\t TITOLO: %s \n\t\t ANNO: %d \n\t\t DURATA: %d \n\t\t ASCOLTI: %d \n\t\t IDBRANO: %d \n",
+			Database.Brano[i].titolo, Database.Brano[i].anno,
+			Database.Brano[i].durata, Database.Brano[i].ascolti,
+			Database.Brano[i].idBrano);
 
 		i++;
 	}
 
 	printf(
-			"\n\n\t\t **************************************************************************** \n\n");
+		"\n\n\t\t **************************************************************************** \n\n");
 
 	return;
-
 }
 
-void VisualizzaAlbum(database Database) {
+void VisualizzaAlbum(database Database)
+{
 
 	int i = 0;
 
 	printf(
-			"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t ********************************* ALBUM ************************************ \n\n");
+		"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t ********************************* ALBUM ************************************ \n\n");
 
 	i = 0;
-	while (Database.Album[i].idAlbum != SENTINELLA) {
+	while (Database.Album[i].idAlbum != SENTINELLA)
+	{
 
 		printf("\n\n\t\t TITOLO: %s \n\t\t ANNO: %d \n\t\t ID: %d \n",
-				Database.Album[i].titolo, Database.Album[i].anno,
-				Database.Album[i].idAlbum);
+			   Database.Album[i].titolo, Database.Album[i].anno,
+			   Database.Album[i].idAlbum);
 
 		i++;
 	}
 
 	printf(
-			"\n\n\t\t **************************************************************************** \n\n");
+		"\n\n\t\t **************************************************************************** \n\n");
 
 	return;
-
 }
 
-void VisualizzaArtisti(database Database) {
+void VisualizzaArtisti(database Database)
+{
 
 	int i = 0;
 
 	printf(
-			"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t ********************************* ARTSITI ************************************ \n\n");
+		"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t ********************************* ARTSITI ************************************ \n\n");
 
 	i = 0;
-	while (Database.Artista[i].idArtista != -1) {
+	while (Database.Artista[i].idArtista != -1)
+	{
 
 		printf(
-				"\n\n\t\t NOME: %s\n\t\t COGNOME: %s \n\t\t NOME D'ARTE: %s \n\t\t ID: %d \n",
-				Database.Artista[i].nome, Database.Artista[i].cognome,
-				Database.Artista[i].nomeArte, Database.Artista[i].idArtista);
+			"\n\n\t\t NOME: %s\n\t\t COGNOME: %s \n\t\t NOME D'ARTE: %s \n\t\t ID: %d \n",
+			Database.Artista[i].nome, Database.Artista[i].cognome,
+			Database.Artista[i].nomeArte, Database.Artista[i].idArtista);
 
 		i++;
 	}
 
 	printf(
-			"\n\n\t\t **************************************************************************** \n\n");
+		"\n\n\t\t **************************************************************************** \n\n");
 
 	return;
-
 }
 
-void VisualizzaPlaylist(database Database) {
+void VisualizzaPlaylist(database Database)
+{
 
 	int i = 0;
 	char s[10];
 
 	printf(
-			"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t ********************************* PLAYLIST ************************************ \n\n");
+		"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t ********************************* PLAYLIST ************************************ \n\n");
 
 	i = 0;
-	while (Database.Playlist[i].idPlaylist != SENTINELLA) {
+	while (Database.Playlist[i].idPlaylist != SENTINELLA)
+	{
 
-		if (Database.Playlist[i].pubblica == 1) {
+		if (Database.Playlist[i].pubblica == 1)
+		{
 
 			strcpy(s, "SI");
-
-		} else {
+		}
+		else
+		{
 
 			strcpy(s, "NO");
 		}
 
 		printf(
-				"\n\n\t\t NOME: %s \n\t\t DESCRIZIONE: %s \n\t\t PUBBLICA: %s \n\t\t ID: %d \n",
-				Database.Playlist[i].nome, Database.Playlist[i].descrizione, s,
-				Database.Playlist[i].idPlaylist);
+			"\n\n\t\t NOME: %s \n\t\t DESCRIZIONE: %s \n\t\t PUBBLICA: %s \n\t\t ID: %d \n",
+			Database.Playlist[i].nome, Database.Playlist[i].descrizione, s,
+			Database.Playlist[i].idPlaylist);
 
 		i++;
-
 	}
 
 	printf(
-			"\n\n\t\t ****************************************************************************** \n\n");
+		"\n\n\t\t ****************************************************************************** \n\n");
 
 	return;
-
 }
 
-void VisualizzaUtenti(database Database) {
+void VisualizzaUtenti(database Database)
+{
 
 	int i = 0;
 	char s[10];
 
 	printf(
-			"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t ********************************* UTENTI ************************************ \n\n");
+		"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t ********************************* UTENTI ************************************ \n\n");
 
 	i = 0;
-	while (Database.Utente[i].idUtente != SENTINELLA) {
+	while (Database.Utente[i].idUtente != SENTINELLA)
+	{
 
-		if (Database.Utente[i].admin == 1) {
+		if (Database.Utente[i].admin == 1)
+		{
 
 			strcpy(s, "SI");
-
-		} else {
+		}
+		else
+		{
 
 			strcpy(s, "NO");
 		}
 
 		printf(
-				"\n\n\t\t USERNAME: %s \n\t\t PASSWORD: %s \n\t\t ADMIN: %s \n\t\t ID: %d \n",
-				Database.Utente[i].nomeUtente, Database.Utente[i].password, s,
-				Database.Utente[i].idUtente);
+			"\n\n\t\t USERNAME: %s \n\t\t PASSWORD: %s \n\t\t ADMIN: %s \n\t\t ID: %d \n",
+			Database.Utente[i].nomeUtente, Database.Utente[i].password, s,
+			Database.Utente[i].idUtente);
 
 		i++;
 	}
 
 	printf(
-			"\n\n\t\t **************************************************************************** \n\n");
+		"\n\n\t\t **************************************************************************** \n\n");
 
 	return;
-
 }
 
-void VisualizzaGeneri(database Database) {
+void VisualizzaGeneri(database Database)
+{
 
 	int i = 0;
 
 	printf(
-			"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t ********************************* GENERI ************************************ \n\n");
+		"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t ********************************* GENERI ************************************ \n\n");
 
 	i = 0;
-	while (Database.Genere[i].idGenere != SENTINELLA) {
+	while (Database.Genere[i].idGenere != SENTINELLA)
+	{
 
 		printf("\n\n\t\t NOME: %s \n\t\t ID: %d \n", Database.Genere[i].nome,
-				Database.Genere[i].idGenere);
+			   Database.Genere[i].idGenere);
 		i++;
 	}
 
 	printf(
-			"\n\n\t\t **************************************************************************** \n\n");
+		"\n\n\t\t **************************************************************************** \n\n");
 
 	return;
-
 }
 
-void StampareInfoBrano(database Database, int IdBrano) {
+void StampareInfoBrano(database Database, int IdBrano)
+{
 
 	printf("\n\n\t\t ''''' BRANO ''''' \n");
 
@@ -219,7 +230,8 @@ void StampareInfoBrano(database Database, int IdBrano) {
 	return;
 }
 
-void StampareInfoAlbum(database Database, int IdAlbum) {
+void StampareInfoAlbum(database Database, int IdAlbum)
+{
 
 	printf("\n\n\t\t ''''' ALBUM ''''' \n");
 	printf("\n\t\t TITOLO: %s", Database.Album[IdAlbum].titolo);
@@ -227,20 +239,20 @@ void StampareInfoAlbum(database Database, int IdAlbum) {
 	printf("\n\t\t ID: %d", Database.Album[IdAlbum].idAlbum);
 
 	return;
-
 }
 
-void StampareInfoGenere(database Database, int IdGenere) {
+void StampareInfoGenere(database Database, int IdGenere)
+{
 
 	printf("\n\n\t\t ''''' GENERE ''''' \n");
 	printf("\n\t\t NOME: %s", Database.Genere[IdGenere].nome);
 	printf("\n\t\t ID: %d", Database.Genere[IdGenere].idGenere);
 
 	return;
-
 }
 
-void StampareInfoArtista(database Database, int IdArtista) {
+void StampareInfoArtista(database Database, int IdArtista)
+{
 
 	printf("\n\n\t\t ''''' ARTISTA ''''' \n");
 	printf("\n\t\t NOME: %s", Database.Artista[IdArtista].nome);
@@ -249,49 +261,50 @@ void StampareInfoArtista(database Database, int IdArtista) {
 	printf("\n\t\t ID: %d", Database.Artista[IdArtista].idArtista);
 
 	return;
-
 }
 
-void StampareInfoPlaylist(database Database, int IdPlaylist) {
+void StampareInfoPlaylist(database Database, int IdPlaylist)
+{
 
 	printf("\n\n\t\t ''''' PLAYLIST ''''' \n");
 	printf("\n\t\t NOME: %s", Database.Playlist[IdPlaylist].nome);
 	printf("\n\t\t DESCRIZIONE: %s", Database.Playlist[IdPlaylist].descrizione);
 
-	if (Database.Playlist[IdPlaylist].pubblica == 1) {
+	if (Database.Playlist[IdPlaylist].pubblica == 1)
+	{
 
 		printf("\n\t\t PUBBLICA: %s", "SI");
-
-	} else {
+	}
+	else
+	{
 
 		printf("\n\t\t PUBBLICA: %s", "NO");
-
 	}
 
 	printf("\n\t\t ID: %d", Database.Playlist[IdPlaylist].idPlaylist);
 
 	return;
-
 }
 
-void StampareInfoUtente(database Database, int IdUtente) {
+void StampareInfoUtente(database Database, int IdUtente)
+{
 
 	printf("\n\n\t\t ''''' UTENTE ''''' \n");
 	printf("\n\t\t NOME UTENTE: %s", Database.Utente[IdUtente].nomeUtente);
 	printf("\n\t\t PASSWORD: %s", Database.Utente[IdUtente].password);
 
-	if (Database.Utente[IdUtente].admin == 1) {
+	if (Database.Utente[IdUtente].admin == 1)
+	{
 
 		printf("\n\t\t ADMIN: %s", "SI");
-
-	} else {
+	}
+	else
+	{
 
 		printf("\n\t\t ADMIN: %s", "NO");
-
 	}
 
 	printf("\n\t\t ID: %d", Database.Utente[IdUtente].idUtente);
 
 	return;
 }
-

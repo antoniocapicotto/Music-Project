@@ -9,36 +9,36 @@ void ModificaStringa(char stringa[]);
 
 database ModificareBrano(database Database);
 database ModificaDatiBrano(Brano BranoModificato, database Database,
-		int IdBrano);
+						   int IdBrano);
 
 /* =========================  ALBUM =================================== */
 
 database ModificareAlbum(database Database);
 database ModificaDatiAlbum(Album AlbumModificato, database Database,
-		int IdAlbum);
+						   int IdAlbum);
 
 /* ========================== GENERE ================================== */
 
 database ModificareGenere(database Database);
 database ModificaDatiGenere(Genere GenereModificato, database Database,
-		int IdGenere);
+							int IdGenere);
 
 /* ========================= PLAYLIST =================================== */
 
 database ModificarePlaylist(database Database);
 database ModificaDatiPlaylist(Playlist PlaylistModificato, database Database,
-		int IdPlaylist);
+							  int IdPlaylist);
 
 /* ======================== ARTISTA =================================== */
 
 database ModificareArtista(database Database);
 database ModificaDatiArtista(Artista ArtistaModificato, database Database,
-		int IdArtista);
+							 int IdArtista);
 
 /* ========================= UTENTE ================================== */
 
 database ModificareUtente(database Database);
 database ModificaDatiUtente(Utente UtenteModificato, database Database,
-		int IdUtente);
+							int IdUtente);
 
 #endif // MODIFICA_H_INCLUDED

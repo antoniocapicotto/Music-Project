@@ -1,26 +1,28 @@
 // Libreria
 #include "./../include/MusicProject.h"
 
-int controllo_caricamento_file(int flag) {
+int controllo_caricamento_file(int flag)
+{
 
 	FILE *File;
 	File = fopen("utenti.txt", "r");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		flag = 0;
-
-	} else {
+	}
+	else
+	{
 
 		flag = 1;
-
 	}
 
 	return flag;
-
 }
 
-database CaricareSuFile(database Database) {
+database CaricareSuFile(database Database)
+{
 
 	Database = CaricareBrani(Database);
 	Database = CaricareAlbum(Database);
@@ -34,27 +36,30 @@ database CaricareSuFile(database Database) {
 	Database = CaricarePlaylistBrano(Database);
 
 	return Database;
-
 }
 
 /* Funzione che permette il caricamento di tutti i brani all'interno del database */
 
-database CaricareBrani(database Database) {
+database CaricareBrani(database Database)
+{
 
 	FILE *File;
 	int i = 0;
 
 	File = fopen("brani.txt", "r");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		fopen("brani.txt", "w");
 		fclose(File);
-
-	} else {
+	}
+	else
+	{
 
 		i = 0;
-		while (!feof(File)) {
+		while (!feof(File))
+		{
 
 			fscanf(File, " %[^\n]", Database.Brano[i].titolo);
 			fscanf(File, "%d", &Database.Brano[i].anno);
@@ -68,30 +73,33 @@ database CaricareBrani(database Database) {
 		Database.Brano[i - 1].idBrano = SENTINELLA;
 
 		fclose(File);
-
 	}
 
 	return Database;
-
 }
 
 /* Funzione che permette il caricamento tutti gli album nel database */
 
-database CaricareAlbum(database Database) {
+database CaricareAlbum(database Database)
+{
 
 	FILE *File;
 	int i = 0;
 
 	File = fopen("album.txt", "r");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		fopen("album.txt", "w");
 		fclose(File);
-	} else {
+	}
+	else
+	{
 
 		i = 0;
-		while (!feof(File)) {
+		while (!feof(File))
+		{
 
 			fscanf(File, " %[^\n]", Database.Album[i].titolo);
 			fscanf(File, "%d", &Database.Album[i].anno);
@@ -103,30 +111,33 @@ database CaricareAlbum(database Database) {
 		Database.Album[i - 1].idAlbum = SENTINELLA;
 
 		fclose(File);
-
 	}
 
 	return Database;
-
 }
 
 /* Funione che permette il caricamento del database tutti gli artisti */
 
-database CaricareArtisti(database Database) {
+database CaricareArtisti(database Database)
+{
 
 	FILE *File;
 	int i = 0;
 
 	File = fopen("artisti.txt", "r");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		fopen("artisti.txt", "w");
 		fclose(File);
-	} else {
+	}
+	else
+	{
 
 		i = 0;
-		while (!feof(File)) {
+		while (!feof(File))
+		{
 
 			fscanf(File, " %[^\n]", Database.Artista[i].nome);
 			fscanf(File, " %[^\n]", Database.Artista[i].cognome);
@@ -139,30 +150,33 @@ database CaricareArtisti(database Database) {
 		Database.Artista[i - 1].idArtista = SENTINELLA;
 
 		fclose(File);
-
 	}
 
 	return Database;
-
 }
 
 /* Funione che permette il caricamento del database tutte le playlist */
 
-database CaricarePlaylist(database Database) {
+database CaricarePlaylist(database Database)
+{
 
 	FILE *File;
 	int i = 0;
 
 	File = fopen("playlist.txt", "r");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		fopen("playlist.txt", "w");
 		fclose(File);
-	} else {
+	}
+	else
+	{
 
 		i = 0;
-		while (!feof(File)) {
+		while (!feof(File))
+		{
 
 			fscanf(File, " %[^\n]", Database.Playlist[i].nome);
 			fscanf(File, " %[^\n]", Database.Playlist[i].descrizione);
@@ -175,31 +189,33 @@ database CaricarePlaylist(database Database) {
 		Database.Playlist[i - 1].idPlaylist = SENTINELLA;
 
 		fclose(File);
-
 	}
 
 	return Database;
-
 }
 
 /* Funione che permette il caricamento del database tutti gli utenti */
 
-database CaricareUtenti(database Database) {
+database CaricareUtenti(database Database)
+{
 
 	FILE *File;
 	int i = 0;
 
 	File = fopen("utenti.txt", "r");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		fopen("utenti.txt", "w");
 		fclose(File);
-
-	} else {
+	}
+	else
+	{
 
 		i = 0;
-		while (!feof(File)) {
+		while (!feof(File))
+		{
 
 			fscanf(File, " %[^\n]", Database.Utente[i].nomeUtente);
 			fscanf(File, " %[^\n]", Database.Utente[i].password);
@@ -212,30 +228,33 @@ database CaricareUtenti(database Database) {
 		Database.Utente[i - 1].idUtente = SENTINELLA;
 
 		fclose(File);
-
 	}
 
 	return Database;
-
 }
 
 /* Funione che permette il caricamento del database tutti i generi */
 
-database CaricareGeneri(database Database) {
+database CaricareGeneri(database Database)
+{
 
 	FILE *File;
 	int i = 0;
 
 	File = fopen("generi.txt", "r");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		fopen("generi.txt", "w");
 		fclose(File);
-	} else {
+	}
+	else
+	{
 
 		i = 0;
-		while (!feof(File)) {
+		while (!feof(File))
+		{
 
 			fscanf(File, " %[^\n]", Database.Genere[i].nome);
 			fscanf(File, "%d", &Database.Genere[i].idGenere);
@@ -246,7 +265,6 @@ database CaricareGeneri(database Database) {
 		Database.Genere[i - 1].idGenere = SENTINELLA;
 
 		fclose(File);
-
 	}
 
 	return Database;
@@ -254,7 +272,8 @@ database CaricareGeneri(database Database) {
 
 /* ================================= SALVATAGGIO SU FILE ==================================== */
 
-void SalvataggioSuFile(database Database) {
+void SalvataggioSuFile(database Database)
+{
 
 	SalvareFileBrani(Database);
 	SalvareFileArtisti(Database);
@@ -268,22 +287,24 @@ void SalvataggioSuFile(database Database) {
 	SalvareFileUtenti(Database);
 
 	return;
-
 }
-void SalvareFileBrani(database Database) {
+void SalvareFileBrani(database Database)
+{
 
 	int i = 0;
 	FILE *File;
 
 	File = fopen("brani.txt", "w");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\n errore \n");
 	}
 
 	i = 0;
-	while (Database.Brano[i].idBrano != SENTINELLA) {
+	while (Database.Brano[i].idBrano != SENTINELLA)
+	{
 
 		fprintf(File, "%s\n", Database.Brano[i].titolo);
 		fprintf(File, "%d\n", Database.Brano[i].anno);
@@ -297,24 +318,25 @@ void SalvareFileBrani(database Database) {
 	fclose(File);
 
 	return;
-
 }
 
-void SalvareFileAlbum(database Database) {
+void SalvareFileAlbum(database Database)
+{
 
 	int i = 0;
 	FILE *File;
 
 	File = fopen("album.txt", "w");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\n errore \n");
-
 	}
 
 	i = 0;
-	while (Database.Album[i].idAlbum != SENTINELLA) {
+	while (Database.Album[i].idAlbum != SENTINELLA)
+	{
 
 		fprintf(File, "%s\n", Database.Album[i].titolo);
 		fprintf(File, "%d\n", Database.Album[i].anno);
@@ -326,24 +348,25 @@ void SalvareFileAlbum(database Database) {
 	fclose(File);
 
 	return;
-
 }
 
-void SalvareFileArtisti(database Database) {
+void SalvareFileArtisti(database Database)
+{
 
 	int i = 0;
 	FILE *File;
 
 	File = fopen("artisti.txt", "w");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\n errore \n");
-
 	}
 
 	i = 0;
-	while (Database.Artista[i].idArtista != SENTINELLA) {
+	while (Database.Artista[i].idArtista != SENTINELLA)
+	{
 
 		fprintf(File, "%s\n", Database.Artista[i].nome);
 		fprintf(File, "%s\n", Database.Artista[i].cognome);
@@ -356,24 +379,25 @@ void SalvareFileArtisti(database Database) {
 	fclose(File);
 
 	return;
-
 }
 
-void SalvareFileGeneri(database Database) {
+void SalvareFileGeneri(database Database)
+{
 
 	int i = 0;
 	FILE *File;
 
 	File = fopen("generi.txt", "w");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\n errore \n");
-
 	}
 
 	i = 0;
-	while (Database.Genere[i].idGenere != SENTINELLA) {
+	while (Database.Genere[i].idGenere != SENTINELLA)
+	{
 
 		fprintf(File, "%s\n", Database.Genere[i].nome);
 		fprintf(File, "%d\n", Database.Genere[i].idGenere);
@@ -384,24 +408,25 @@ void SalvareFileGeneri(database Database) {
 	fclose(File);
 
 	return;
-
 }
 
-void SalvareFilePlaylist(database Database) {
+void SalvareFilePlaylist(database Database)
+{
 
 	int i = 0;
 	FILE *File;
 
 	File = fopen("playlist.txt", "w");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\n errore \n");
-
 	}
 
 	i = 0;
-	while (Database.Playlist[i].idPlaylist != -1) {
+	while (Database.Playlist[i].idPlaylist != -1)
+	{
 
 		fprintf(File, "%s\n", Database.Playlist[i].nome);
 		fprintf(File, "%s\n", Database.Playlist[i].descrizione);
@@ -414,23 +439,25 @@ void SalvareFilePlaylist(database Database) {
 	fclose(File);
 
 	return;
-
 }
 
-void SalvareFileUtenti(database Database) {
+void SalvareFileUtenti(database Database)
+{
 
 	int i = 0;
 	FILE *File;
 
 	File = fopen("utenti.txt", "w");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\n errore \n");
 	}
 
 	i = 0;
-	while (Database.Utente[i].idUtente != SENTINELLA) {
+	while (Database.Utente[i].idUtente != SENTINELLA)
+	{
 
 		fprintf(File, "%s\n", Database.Utente[i].nomeUtente);
 		fprintf(File, "%s\n", Database.Utente[i].password);
@@ -443,12 +470,12 @@ void SalvareFileUtenti(database Database) {
 	fclose(File);
 
 	return;
-
 }
 
 /* ====================================== RIPRISTINO DA FILE DI BACKUP ================================= */
 
-database RipristinoDaFile(database Database) {
+database RipristinoDaFile(database Database)
+{
 
 	/*  ripristino di tutti i dati dal backup */
 
@@ -467,24 +494,26 @@ database RipristinoDaFile(database Database) {
 	Database = RipristinoPlaylistBrano(Database);
 
 	return Database;
-
 }
 /* Funzione che permette di ripristinare tutti i brani all'interno del database */
 
-database RipristinoBrani(database Database) {
+database RipristinoBrani(database Database)
+{
 
 	FILE *File;
 	int i = 0;
 
 	File = fopen("backupbrani.txt", "r");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\n\n\t ERRORE RIPRISTINO FILE BRANI! \n");
 	}
 
 	i = 0;
-	while (!feof(File)) {
+	while (!feof(File))
+	{
 
 		fscanf(File, " %[^\n]", Database.Brano[i].titolo);
 		fscanf(File, "%d", &Database.Brano[i].anno);
@@ -504,20 +533,23 @@ database RipristinoBrani(database Database) {
 
 /* Funzione che permette di ripristinare tutti gli album all'interno del database */
 
-database RipristinoAlbum(database Database) {
+database RipristinoAlbum(database Database)
+{
 
 	FILE *File;
 	int i = 0;
 
 	File = fopen("backupalbum.txt", "r");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\n\n\t ERRORE RIPRISTINO FILE ALBUM! \n");
 	}
 
 	i = 0;
-	while (!feof(File)) {
+	while (!feof(File))
+	{
 
 		fscanf(File, " %[^\n]", Database.Album[i].titolo);
 		fscanf(File, "%d", &Database.Album[i].anno);
@@ -531,25 +563,27 @@ database RipristinoAlbum(database Database) {
 	fclose(File);
 
 	return Database;
-
 }
 
 /* Funzione che permette di ripristinare tutti gli artisti all'interno del database */
 
-database RipristinoArtisti(database Database) {
+database RipristinoArtisti(database Database)
+{
 
 	FILE *File;
 	int i = 0;
 
 	File = fopen("backupartisti.txt", "r");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\nerrore!\n");
 	}
 
 	i = 0;
-	while (!feof(File)) {
+	while (!feof(File))
+	{
 
 		fscanf(File, " %[^\n]", Database.Artista[i].nome);
 		fscanf(File, " %[^\n]", Database.Artista[i].cognome);
@@ -564,25 +598,27 @@ database RipristinoArtisti(database Database) {
 	fclose(File);
 
 	return Database;
-
 }
 
 /* Funzione che permette di ripristinare tutte le playlist all'interno del database */
 
-database RipristinoPlaylist(database Database) {
+database RipristinoPlaylist(database Database)
+{
 
 	FILE *File;
 	int i = 0;
 
 	File = fopen("backupplaylist.txt", "r");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\n\n\t ERRORE RIPRISTINO FILE PLAYLIST! \n");
 	}
 
 	i = 0;
-	while (!feof(File)) {
+	while (!feof(File))
+	{
 
 		fscanf(File, " %[^\n]", Database.Playlist[i].nome);
 		fscanf(File, " %[^\n]", Database.Playlist[i].descrizione);
@@ -597,26 +633,27 @@ database RipristinoPlaylist(database Database) {
 	fclose(File);
 
 	return Database;
-
 }
 
 /* Funzione che permette di ripristinare tutti gli utenti all'interno del database */
 
-database RipristinoUtenti(database Database) {
+database RipristinoUtenti(database Database)
+{
 
 	FILE *File;
 	int i = 0;
 
 	File = fopen("backuputenti.txt", "r");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\n\n\t ERRORE RIPRISTINO FILE UTENTI! \n");
-
 	}
 
 	i = 0;
-	while (!feof(File)) {
+	while (!feof(File))
+	{
 
 		fscanf(File, " %[^\n]", Database.Utente[i].nomeUtente);
 		fscanf(File, " %[^\n]", Database.Utente[i].password);
@@ -631,26 +668,27 @@ database RipristinoUtenti(database Database) {
 	fclose(File);
 
 	return Database;
-
 }
 
 /* Funzione che permette di ripristinare tutti i generi all'interno del database */
 
-database RipristinoGeneri(database Database) {
+database RipristinoGeneri(database Database)
+{
 
 	FILE *File;
 	int i = 0;
 
 	File = fopen("backupgeneri.txt", "r");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\n\n\t ERRORE RIPRISTINO FILE GENERI! \n");
-
 	}
 
 	i = 0;
-	while (!feof(File)) {
+	while (!feof(File))
+	{
 
 		fscanf(File, " %[^\n]", Database.Genere[i].nome);
 		fscanf(File, "%d", &Database.Genere[i].idGenere);
@@ -665,25 +703,28 @@ database RipristinoGeneri(database Database) {
 	return Database;
 }
 
-int controllo_backup(int controllo) {
+int controllo_backup(int controllo)
+{
 
 	FILE *File;
 	File = fopen("backuputenti.txt", "r");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		controllo = 0;
-
-	} else {
+	}
+	else
+	{
 
 		controllo = 1;
 	}
 
 	return controllo;
-
 }
 
-void BackupSuFile(database Database) {
+void BackupSuFile(database Database)
+{
 
 	BackupBrani(Database);
 	BackupAlbum(Database);
@@ -697,23 +738,24 @@ void BackupSuFile(database Database) {
 	BackupPlaylistBrano(Database);
 
 	return;
-
 }
-void BackupBrani(database Database) {
+void BackupBrani(database Database)
+{
 
 	int i = 0;
 	FILE *File;
 
 	File = fopen("backupbrani.txt", "w");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\n errore \n");
-
 	}
 
 	i = 0;
-	while (Database.Brano[i].idBrano != SENTINELLA) {
+	while (Database.Brano[i].idBrano != SENTINELLA)
+	{
 
 		fprintf(File, "%s\n", Database.Brano[i].titolo);
 		fprintf(File, "%d\n", Database.Brano[i].anno);
@@ -727,10 +769,10 @@ void BackupBrani(database Database) {
 	fclose(File);
 
 	return;
-
 }
 
-void BackupAlbum(database Database) {
+void BackupAlbum(database Database)
+{
 
 	int i = 0;
 
@@ -738,14 +780,15 @@ void BackupAlbum(database Database) {
 
 	File = fopen("backupalbum.txt", "w");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\n errore \n");
-
 	}
 
 	i = 0;
-	while (Database.Album[i].idAlbum != SENTINELLA) {
+	while (Database.Album[i].idAlbum != SENTINELLA)
+	{
 
 		fprintf(File, "%s\n", Database.Album[i].titolo);
 		fprintf(File, "%d\n", Database.Album[i].anno);
@@ -757,24 +800,25 @@ void BackupAlbum(database Database) {
 	fclose(File);
 
 	return;
-
 }
 
-void BackupArtisti(database Database) {
+void BackupArtisti(database Database)
+{
 
 	int i = 0;
 	FILE *File;
 
 	File = fopen("backupartisti.txt", "w");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\n errore \n");
-
 	}
 
 	i = 0;
-	while (Database.Artista[i].idArtista != SENTINELLA) {
+	while (Database.Artista[i].idArtista != SENTINELLA)
+	{
 
 		fprintf(File, "%s\n", Database.Artista[i].nome);
 		fprintf(File, "%s\n", Database.Artista[i].cognome);
@@ -787,24 +831,25 @@ void BackupArtisti(database Database) {
 	fclose(File);
 
 	return;
-
 }
 
-void BackupGeneri(database Database) {
+void BackupGeneri(database Database)
+{
 
 	int i = 0;
 	FILE *File;
 
 	File = fopen("backupgeneri.txt", "w");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\n errore \n");
-
 	}
 
 	i = 0;
-	while (Database.Genere[i].idGenere != SENTINELLA) {
+	while (Database.Genere[i].idGenere != SENTINELLA)
+	{
 
 		fprintf(File, "%s\n", Database.Genere[i].nome);
 		fprintf(File, "%d\n", Database.Genere[i].idGenere);
@@ -815,24 +860,25 @@ void BackupGeneri(database Database) {
 	fclose(File);
 
 	return;
-
 }
 
-void BackupPlaylist(database Database) {
+void BackupPlaylist(database Database)
+{
 
 	int i = 0;
 	FILE *File;
 
 	File = fopen("backupplaylist.txt", "w");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\n errore \n");
-
 	}
 
 	i = 0;
-	while (Database.Playlist[i].idPlaylist != SENTINELLA) {
+	while (Database.Playlist[i].idPlaylist != SENTINELLA)
+	{
 
 		fprintf(File, "%s\n", Database.Playlist[i].nome);
 		fprintf(File, "%s\n", Database.Playlist[i].descrizione);
@@ -845,24 +891,25 @@ void BackupPlaylist(database Database) {
 	fclose(File);
 
 	return;
-
 }
 
-void BackupUtenti(database Database) {
+void BackupUtenti(database Database)
+{
 
 	int i = 0;
 	FILE *File;
 
 	File = fopen("backuputenti.txt", "w");
 
-	if (File == NULL) {
+	if (File == NULL)
+	{
 
 		printf("\n errore \n");
-
 	}
 
 	i = 0;
-	while (Database.Utente[i].idUtente != SENTINELLA) {
+	while (Database.Utente[i].idUtente != SENTINELLA)
+	{
 
 		fprintf(File, "%s\n", Database.Utente[i].nomeUtente);
 		fprintf(File, "%s\n", Database.Utente[i].password);
@@ -875,5 +922,4 @@ void BackupUtenti(database Database) {
 	fclose(File);
 
 	return;
-
 }

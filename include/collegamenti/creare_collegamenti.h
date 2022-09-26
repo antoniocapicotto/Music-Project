@@ -24,7 +24,7 @@ database AssociaPlaylistBrano(database Database, int IdBrano, int IdPlaylist);
 database CreareCollegamentiAlbumBrani(database Database, Album NuovoAlbum);
 database CreareCollegamentiGenereBrani(database Database, Genere NuovoGenere);
 database CreareCollegamentiPlaylistBrani(database Database,
-		Playlist NuovaPlaylist);
+										 Playlist NuovaPlaylist);
 database CreareCollegamentiArtistaBrani(database Database, Artista NuovoArtista);
 
 #endif /* CREARE_COLLEGAMENTI_H_ */
