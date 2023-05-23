@@ -8,7 +8,7 @@ With the CLI Music Database Manager, users can dive into an extensive collection
 
 ## Technologies Used
 
-✨ C
+✨ C | 🌟 Eclipse
 
 ## Features
 
