@@ -23,5 +23,3 @@ The CLI Music Database Manager offers a wide range of features, including:
 ## Repository Contents
 
 In this GitHub repository, you will find the complete source code and associated files for the CLI Music Database Manager project. The code is well-structured and commented, providing an insightful look into the implementation details. Additionally, you'll find a detailed user guide to help you get started and make the most out of this powerful music management tool.
-
-## Let the Music Exploration Begin! 🎶🔍
