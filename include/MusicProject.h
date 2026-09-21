@@ -1,12 +1,36 @@
 #ifndef MAIN_H_INCLUDED
 #define MAIN_H_INCLUDED
 
-// Librerie
+// Librerie standard
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdbool.h>
+
+// Supporto per input a tastiera multipiattaforma
+#if defined(_WIN32) || defined(_WIN64)
 #include <conio.h>
+#else
+#include <termios.h>
+#include <unistd.h>
+
+static int getch(void)
+{
+    struct termios oldt, newt;
+    int ch;
+
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+
+    ch = getchar();
+
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    return ch;
+}
+#endif
 
 // Costanti
 #define SENTINELLA -1
@@ -22,7 +46,7 @@ typedef struct
 	int durata;		 //  Durata del brano in secondi
 	int anno;		 //  Anno di uscita del brano
 	int ascolti;	 //  Numero di ascolti
-} Brano;			 // Questa � la struttura dati di Brano
+} Brano;			 // Questa è la struttura dati di Brano
 
 typedef struct
 {
@@ -69,7 +93,7 @@ typedef struct
 	char nome[30];		   // Nome della playlist
 	char descrizione[250]; // Descrizione playlist
 	int pubblica;		   // Tipologia playlist
-} Playlist;				   // Struttura dati della playlist
+} Playlist;			   // Struttura dati della playlist
 
 typedef struct
 {
@@ -79,7 +103,7 @@ typedef struct
 
 typedef struct
 {
-	int idUtente;		 // Identificativo dell�utente
+	int idUtente;		 // Identificativo dell'utente
 	char nomeUtente[60]; // Nominativo dell'utente
 	char password[60];	 // Password dell'utente
 	int admin;			 // Controllo ruolo utente
@@ -98,8 +122,8 @@ typedef struct
 	Playlist Playlist[30];			 // Tabella Playlist
 	PlaylistBrano PlaylistBrano[30]; // Tabella che indica la relazione tra Plylist e Brano
 	Utente Utente[30];				 // Tabella Utente
-	int UltimoEsito;				 // Intero >= 0, se esito = 0 vuol dire che l'operazione � andata a buon fine
-									 // altrimenti esito rappresenta il codice dell'errore che si � verificato
+	int UltimoEsito;				 // Intero >= 0, se esito = 0 vuol dire che l'operazione è andata a buon fine
+								 // altrimenti esito rappresenta il codice dell'errore verificato
 } database;							 // Struttura dati del Database
 
 // librerie
@@ -110,5 +134,6 @@ typedef struct
 #include "modifica.h"
 #include "cancellazione.h"
 #include "./collegamenti/collegamenti.h"
+#include "ui.h"
 
 #endif // MAIN_H_INCLUDED
